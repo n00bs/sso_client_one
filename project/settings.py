@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
 }
 
 REST_FRAMEWORK_SSO = {
-    'AUTHENTICATE_PAYLOAD': 'rest_framework_sso.utils.authenticate_payload',
+    'AUTHENTICATE_PAYLOAD': 'sso_client_one.authentication.authenticate_payload',
     'DECODE_JWT_TOKEN': 'rest_framework_sso.utils.decode_jwt_token',
     'ENCODE_ALGORITHM': 'RS256',
     'VERIFY_SESSION_TOKEN': False,

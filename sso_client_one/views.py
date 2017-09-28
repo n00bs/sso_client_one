@@ -1,10 +1,20 @@
-from django.contrib.auth import get_user_model
-from rest_framework_sso import claims
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from django.urls import reverse
 
 
-class show_token(APIView):
-    def get_context_data(self, **kwargs):
-        print "logged"
-        return HttpResponse("logged in")
+class ExampleView(APIView):
+    # permission_classes = (IsAuthenticated,)
+
+    def get(self, request, format=None):
+        if request.user.is_authenticated:
+            print "example"
+            return Response("example view")
+        else:
+            return Response("not logged in")
+            # import pdb; pdb.set_trace()
+            #return HttpResponseRedirect(
+            #    "http://localhost:8003/sso/authorize/?successful_redirect_url=http://localhost:8002/client/token/"
+            #)
