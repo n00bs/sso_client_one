@@ -1,10 +1,8 @@
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
-from sso_client_one.views import ExampleView
-from django.views.generic import TemplateView
-
+from sso_client_one.views import HomeView, AuthenticateView
 
 urlpatterns = [
-    # url(r'^token/', TemplateView.as_view(template_name="token.html")),
-    url(r'^token/', ExampleView.as_view())
+    url(r'^token/', HomeView.as_view()),
+    url(r'^authenticate/', AuthenticateView.as_view())
 ]

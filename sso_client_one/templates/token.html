@@ -1,1 +1,12 @@
-Hello world
+{% load staticfiles %}
+<html>
+<head>
+    <title> TVC Client Prototype </title>
+</head>
+<body>
+    <h2>Token Vending Maching Client (Prototype)</h2>
+    <p>{{ reply }}</p>
+    {% if token_URL %}
+        <a href="{{ token_URL }}">Login</a>
+    {% endif %}
+</body>

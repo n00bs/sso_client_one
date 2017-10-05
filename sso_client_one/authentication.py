@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework_sso import claims
+from rest_framework import exceptions
 
 
 def authenticate_payload(payload):
@@ -8,8 +9,5 @@ def authenticate_payload(payload):
         username=payload.get(claims.USER_ID),
     )
     if not user.is_active:
-        raise exceptions.AuthenticationFailed(_('User inactive or deleted.'))
-    if not created:
-        raise exceptions.AuthenticationFailed(_('Error occured while creating \
-        account on this service.'))
+        raise exceptions.AuthenticationFailed('User inactive or deleted.')
     return user

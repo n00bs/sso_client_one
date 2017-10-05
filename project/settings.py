@@ -44,8 +44,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -122,11 +123,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+SSO_URL = "http://localhost:8003/sso/authorize/"
+LOGIN_URL = "http://localhost:8002/client/authenticate/"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_sso.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_sso.authentication.JWTAuthentication',
     ),
 }
 
@@ -140,4 +143,9 @@ REST_FRAMEWORK_SSO = {
     'PUBLIC_KEYS': {
         'sso_auth': 'keys/public_key.pem',
     },
+}
+
+AUTHENTICATION_BACKEND = {
+    'rest_framework.authentication.SessionAuthentication',
+    'rest_framework_sso.authentication.JWTAuthentication',
 }
